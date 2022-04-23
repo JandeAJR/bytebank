@@ -1,0 +1,34 @@
+
+<!--
+<div *ngFor="let transferencia of transferencias">
+  <p>Data : {{ transferencia?.data }}</p>
+  <p>Valor é igual a : {{ transferencia?.valor }}</p>
+  <p>Destino é igual a : {{ transferencia?.destino }}</p>
+</div>
+-->
+
+<!-- A notação {{ transferencia?.data }} trata-se de um property bind -->
+<!-- Onde o sinal de ? significa que pode vir um valor null ou não -->
+<div>
+  <table class="tabela">
+    <thead class="tabela__cabecalho">
+      <th class="tabela__cabecalho__conteudo">Data</th>
+      <th class="tabela__cabecalho__conteudo">Destino</th>
+      <th class="tabela__cabecalho__conteudo">Valor</th>
+      <th class="tabela__cabecalho__conteudo">Descrição</th>
+    </thead>
+
+    <tbody *ngIf="transferencias?.length > 0; else listavazia">
+      <tr class="tabela__linha" *ngFor="let transferencia of transferencias">
+        <td class="tabela__conteudo">{{ transferencia?.data  | date: "short" }}</td>
+        <td class="tabela__conteudo">{{ transferencia?.destino }}</td>
+        <td class="tabela__conteudo">{{ transferencia?.valor | currency }}</td>
+        <td class="tabela__conteudo">{{ transferencia?.descricao }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<<ng-template #listavazia>
+  <p>Nenhuma transferência cadastrada.</p>
+</ng-template>
