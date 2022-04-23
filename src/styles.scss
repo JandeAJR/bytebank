@@ -5,6 +5,17 @@
   --padding: 15px;
   --cinza : #405040;
   --cinza-claro: #dedede;
+  --border-radius: 15px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: inherit;
 }
 
 * {

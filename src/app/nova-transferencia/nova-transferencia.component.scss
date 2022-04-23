@@ -1,7 +1,7 @@
 .formulario {
   background-color: white;
   padding: 16px;
-  border-radius: 4px;
+  border-radius: var(--border-radius);
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
   &__titulo {
     text-transform: capitalize;
