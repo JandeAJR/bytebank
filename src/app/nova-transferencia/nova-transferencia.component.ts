@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter } from "@angular/core";
+import { Component, Output, EventEmitter, Renderer2 } from "@angular/core";
 import { TransferenciaService } from '../services/transferencia.service';
 import { Transferencia } from '../models/transferencia.model';
 import { Router } from "@angular/router";
@@ -17,9 +17,14 @@ export class NovaTransferenciaComponent {
   descricao: string = '';
 
   constructor(private service: TransferenciaService,
-    private router: Router) {}
+    private router: Router,
+    private renderer: Renderer2) {}
 
-  transferir() {
+  ngOnInit(): void {
+    this.focoInput();
+  }
+
+  transferir(): void {
     console.log('Solicitada nova transferência');
 
     //const valorEmitir = {valor: this.valor, destino: this.destino, descricao: this.descricao};
@@ -27,7 +32,8 @@ export class NovaTransferenciaComponent {
 
     // Forma nova de implementar o método subscribe (versões novas do Angular)
     this.service.adicionar(valorEmitir).subscribe({
-      next: () => [this.limparCampos(), this.router.navigateByUrl('extrato')],
+      next: () => [this.limparCampos(),
+                   this.router.navigateByUrl('extrato')],
       error: (error) => console.error(error),
       complete: () => console.info('complete!')
     })
@@ -47,10 +53,14 @@ export class NovaTransferenciaComponent {
     //this.limparCampos();
   }
 
-  limparCampos() {
+  limparCampos(): void {
     this.valor = 0;
     this.destino = 0;
     this.descricao = '';
+  }
+
+  focoInput(): void {
+    this.renderer.selectRootElement('#id_destino').focus();
   }
 
 }
